@@ -1,7 +1,7 @@
 from typing import Self
 
 
-class LinkedNode[T]:
+class SingleLinkedNode[T]:
     def __init__(self, data: T, next_node: Self | None = None):
         self.data = data
         self.next_node = next_node
@@ -18,7 +18,7 @@ class DoublyLinkedNode[T](LinkedNode):
         self.prev_node = prev_node
 
 
-class LinkedList[T]:
+class SingleLinkedList[T]:
     def __init__(self, *data: T) -> None:
         self.head_node = LinkedNode(data[0])
         for datum in data[1:]:
@@ -42,7 +42,7 @@ class LinkedList[T]:
         self.head_node = new_node
 
 
-linky = LinkedList[str]("Hello", "There", "Linked")
-linky.insert("List")
+linky1 = SingleLinkedList[str]("Hello", "There", "Linked")
+linky1.insert("List")
 
-print(linky)
+print(linky1)

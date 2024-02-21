@@ -7,7 +7,7 @@ class SingleLinkedNode[T]:
         self.next_node = next_node
 
 
-class DoublyLinkedNode[T](LinkedNode):
+class DoubleLinkedNode[T](SingleLinkedNode):
     def __init__(
         self,
         data: T,

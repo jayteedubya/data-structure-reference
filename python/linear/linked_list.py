@@ -48,6 +48,14 @@ class SingleLinkedList[T]:
         new_node.next_node = self.head_node
         self.head_node = new_node
 
+    def append(self, datum: T) -> None:
+        """Inserts data and the end of the list"""
+        new_node = SingleLinkedNode(datum)
+        current_node = self.head_node
+        while current_node.next_node is not None:
+            current_node = current_node.next_node
+        current_node.next_node = new_node
+
 
 class DoubleLinkedList[T]:
     def __init__(self, *data: T) -> None:
@@ -68,7 +76,12 @@ class DoubleLinkedList[T]:
         new_node = DoubleLinkedNode(
             datum, next_node=self.head_node, prev_node=self.head_node.prev_node
         )
-        self.head_node = new_node
+        if self.head_node is not None:
+            self.head_node.prev_node = new_node
+            new_node.next_node = self.head_node
+            self.head_node = new_node
+        if self.tail_node is None:
+            self.tail_node = new_node
 
     def append(self, datum: T) -> None:
         new_node = DoubleLinkedNode(datum, prev_node=self.tail_node)
@@ -80,12 +93,13 @@ if __name__ == "__main__":
 
     linky1 = SingleLinkedList[str]("List", "Linked", "Single", "There")
     linky1.insert("Hello")
+    linky1.append("!")
 
     print(f"Single Linked List: {linky1}")
     print(f"linky at index 2: {linky1[3]}")
 
-    # linky2 = DoubleLinkedList[str]("Hello", "There", "Double", "Linked")
-    # linky2.insert("List")
+    linky2 = DoubleLinkedList[str]("Hello", "There", "Double", "Linked")
+    linky2.insert("List")
     # linky2.append("Backwards")
 
-    # print(f"Double Linked List: {linky2}")
+    print(f"Double Linked List: {linky2}")

@@ -84,9 +84,13 @@ class DoubleLinkedList[T]:
             self.tail_node = new_node
 
     def append(self, datum: T) -> None:
-        new_node = DoubleLinkedNode(datum, prev_node=self.tail_node)
-        self.tail_node.next_node = new_node
-        self.tail_node = new_node
+        new_node = DoubleLinkedNode(datum)
+        if self.tail_node is not None:
+            new_node.prev_node = self.tail_node
+            self.tail_node.next_node = new_node
+            self.tail_node = new_node
+        if self.head_node is None:
+            self.head_node = new_node
 
 
 if __name__ == "__main__":
@@ -100,6 +104,6 @@ if __name__ == "__main__":
 
     linky2 = DoubleLinkedList[str]("Hello", "There", "Double", "Linked")
     linky2.insert("List")
-    # linky2.append("Backwards")
+    linky2.append("Backwards")
 
     print(f"Double Linked List: {linky2}")
